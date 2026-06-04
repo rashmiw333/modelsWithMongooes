@@ -1,6 +1,6 @@
-const mongooes = require("mongoose");
+const mongoose = require("mongoose");
 
-const restaurantSchema = new mongooes.Schema({
+const restaurantSchema = new mongoose.Schema({
     name:{
         type: String,
         required:true
@@ -33,7 +33,7 @@ const restaurantSchema = new mongooes.Schema({
         type: String
     }
 
-},{timeStamps:true},
+},{timestamps:true},
 );
 
 const Restaurants = mongoose.model("Restaurants",restaurantSchema);

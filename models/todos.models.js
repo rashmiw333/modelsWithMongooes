@@ -1,6 +1,6 @@
-const mongooes = require("mongoose");
+const mongoose = require("mongoose");
 
-const todoSchema = new mongooes.Schema({
+const todoSchema = new mongoose.Schema({
     title:{
         type: String,
         required:true
@@ -20,7 +20,7 @@ const todoSchema = new mongooes.Schema({
         default: false
     },
     tags: String,
-},{timeStamps:true},
+},{timestamps:true},
 );
 
 const Todos =  mongoose.model("Todos",todoSchema);

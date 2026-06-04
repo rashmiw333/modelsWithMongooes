@@ -1,6 +1,6 @@
-const mongooes = require("mongoose");
+const mongoose = require("mongoose");
 
-const booksSchema = new mongooes.Schema({
+const booksSchema = new mongoose.Schema({
     title:{
         type: String,
         required:true
@@ -38,7 +38,7 @@ const booksSchema = new mongooes.Schema({
         type: String
     }
 
-},{timeStamps:true},
+},{timestamps:true},
 );
 
 const Books = mongoose.model("Books",booksSchema);

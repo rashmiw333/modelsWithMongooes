@@ -1,6 +1,6 @@
-const mongooes = require("mongoose");
+const mongoose = require("mongoose");
 
-const fruitSchema = new mongooes.Schema({
+const fruitSchema = new mongoose.Schema({
     fruitImageUrl: String,
     fruitName: String,
     fruitInfo: String,

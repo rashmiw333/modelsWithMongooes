@@ -1,6 +1,6 @@
-const mongooes = require("mongoose");
+const mongoose = require("mongoose");
 
-const noteSchema = new mongooes.Schema({
+const noteSchema = new mongoose.Schema({
     title:{
         type: String,
         required:true
@@ -16,7 +16,7 @@ const noteSchema = new mongooes.Schema({
         type: String
     }
 
-},{timeStamps:true},
+},{ timestamps: true },
 );
 
 const Note =  mongoose.model("Note",noteSchema);

@@ -1,6 +1,6 @@
-const mongooes = require("mongoose");
+const mongoose = require("mongoose");
 
-const smartPhoneSchema = new mongooes.Schema({
+const smartPhoneSchema = new mongoose.Schema({
     brand:{
         type: String,
         required:true
@@ -52,7 +52,7 @@ const smartPhoneSchema = new mongooes.Schema({
     colorsAvailable : String,
     features : String
 
-},{timeStamps:true},
+},{timestamps:true},
 );
 
 const SmartPhones = mongoose.model("SmartPhones",smartPhoneSchema);

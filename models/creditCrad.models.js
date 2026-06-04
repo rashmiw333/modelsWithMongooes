@@ -1,4 +1,4 @@
-const mongooes = require("mongoose");
+const mongoose = require("mongoose");
 
 const cardSchema = new mongooes.Schema({
     bankName: String,
