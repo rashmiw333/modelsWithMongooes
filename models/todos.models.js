@@ -7,6 +7,7 @@ const todoSchema = new mongooes.Schema({
     },
     description:{
         type: String,
+    },
     priority :{
          type: String,
         enum:['Low', 'Medium', 'High']
@@ -19,9 +20,9 @@ const todoSchema = new mongooes.Schema({
         default: false
     },
     tags: String,
-}},{timeStamps:true},
+},{timeStamps:true},
 );
 
-const Todos = new mongoose.model("Todos",todoSchema);
+const Todos =  mongoose.model("Todos",todoSchema);
 
 module.exports = Todos;
