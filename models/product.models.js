@@ -18,7 +18,7 @@ price: Number
 
 });
 
-const Product = new mongoose.model("Product",productSchema);
+const Product =  mongoose.model("Product",productSchema);
 
 module.exports = Product;
 

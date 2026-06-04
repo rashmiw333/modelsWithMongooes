@@ -11,6 +11,6 @@ const fruitSchema = new mongooes.Schema({
 
 });
 
-const Fruit = new mongoose.model("Fruit",fruitSchema);
+const Fruit = mongoose.model("Fruit",fruitSchema);
 
 module.exports = Fruit;

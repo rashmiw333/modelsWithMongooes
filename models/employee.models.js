@@ -11,6 +11,6 @@ const employeeSchema = new mongoose.Schema({
     address: String
 });
 
-const Employee = new mongoose.model("Employee",employeeSchema);
+const Employee = mongoose.model("Employee",employeeSchema);
 
 module.exports = Employee;

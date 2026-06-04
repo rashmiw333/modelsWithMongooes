@@ -12,6 +12,6 @@ const cardSchema = new mongooes.Schema({
 
 });
 
-const CreditCard = new mongoose.model("CreditCard",cardSchema);
+const CreditCard = mongoose.model("CreditCard",cardSchema);
 
 module.exports = CreditCard;

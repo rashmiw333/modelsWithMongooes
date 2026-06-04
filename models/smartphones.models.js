@@ -55,6 +55,6 @@ const smartPhoneSchema = new mongooes.Schema({
 },{timeStamps:true},
 );
 
-const SmartPhones = new mongoose.model("SmartPhones",smartPhoneSchema);
+const SmartPhones = mongoose.model("SmartPhones",smartPhoneSchema);
 
 module.exports = SmartPhones;

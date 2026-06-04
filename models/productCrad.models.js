@@ -6,7 +6,7 @@ const productSchema = new mongooes.Schema({
     productRating:Number,
     productReviews: String,
     productFeatures: {
-        type: String,
+        type: [String],
         default: [
       'High-resolution 4K movie recording',
       'Choose your own shooting style',
@@ -32,6 +32,6 @@ const productSchema = new mongooes.Schema({
 
 });
 
-const ProductCard = new mongoose.model("ProductCard",productSchema);
+const ProductCard =  mongoose.model("ProductCard",productSchema);
 
 module.exports = ProductCard;
