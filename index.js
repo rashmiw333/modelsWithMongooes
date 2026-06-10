@@ -29,4 +29,30 @@ initializeDatabase();
             }
         }
            
- createMovie(newMovie);
+// createMovie(newMovie);
+
+//find movie by id and update its rating
+
+async function movieUpdate(movieId,dataToUpdate){
+    try{
+        const updateMovie = await Movie.findByIdAndUpdate(movieId,dataToUpdate,{new:true});
+        console.log(updateMovie);
+    }catch(error){
+        console.log("Error in updating movie data",error);
+    }
+}
+
+//movieUpdate('6a22917a21a8df4483b4ca5f',{releaseYear: 2005})
+
+//find one data and update its value
+
+async function updateMovieDetail(movieTitle,dataToUpdate){
+    try{
+        const updatedMovie = await Movie.findOneAndUpdate({title:movieTitle},dataToUpdate,{new:true});
+        console.log(updatedMovie);
+    }catch(error){
+        console.log("Error in chnaging data",error);
+    }
+}
+
+updateMovieDetail("Lagaan",{releaseYear: 2001});
