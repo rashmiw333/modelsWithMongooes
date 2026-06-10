@@ -32,80 +32,41 @@ initializeDatabase();
            
 //  createRestaurant(newRestaurant);
 
-//Task 3:Read all restaurants 
+//  Task1: with restaurant ID and an object with updated data of rating from 3.9 to 4.1.
 
-async function readAllRestaturantsData(){
+async function restaurantUpdate(restaurantId,dataToUpdate){
     try{
-        const allRestaurants = await Restaurant.find();
-        console.log(allRestaurants);
+        const updatedData = await Restaurant.findByIdAndUpdate(restaurantId,dataToUpdate,{new:true});
+        console.log(updatedData);
     }catch(error){
-        throw error;
+        console.log("Error while updating data",error);
     }
 }
 
-//readAllRestaturantsData();
+//restaurantUpdate('6a27c77e767452474a7bd63d',{rating:4.1})
 
-//Task 4: read restaurants by name
+//Task2:  update  name from "Somi" to "Som Sarovar".
 
-async function readRestaurantsByname(restaurantName){
+async function updateRestaurantDetails(restaurantname,dataToupdate){
     try{
-        const restaurantByName = await Restaurant.find({name:restaurantName});
-        console.log(restaurantByName);
+        const updatedRestaurant = await Restaurant.findOneAndUpdate({name:restaurantname},dataToupdate,{new:true});
+        console.log(updatedRestaurant);
     }catch(error){
-        throw error;
+        console.log("Error occurred while chnaging data",error);
     }
 }
 
-//readRestaurantsByname("Somi");
+//updateRestaurantDetails('Somi',{name: 'Som Sarovar'});
 
-//Task 5: Restaurants Which Offers reservations
+//Task 3: restaurant with phone number "+1288997392",update isDeliveryAvailable option to true.
 
-async function readALLRestaurantsWithReservations(){
+async function updatePhoneNumber(phoneNumber,dataToUpdate){
     try{
-    const allRestaurants = await Restaurant.find({reservationsNeeded:true});
-    console.log(allRestaurants);
+        const updatedRestaurant = await Restaurant.findOneAndUpdate({phoneNumber},dataToUpdate,{new:true});
+        console.log(updatedRestaurant);
     }catch(error){
-        throw error;
+        console.log("Error while changing the data",error);
     }
 }
 
-// readALLRestaurantsWithReservations();
-
-//Task 6: Restaurants offers delivery
-
-async function restaurantsWithDelivery(){
-    try{
-    const restaurantsWithDelivery = await Restaurant.find({isDeliveryAvailable:true});
-    console.log(restaurantsWithDelivery);
-    }catch(error){
-        throw error;
-    }
-}
-
-//restaurantsWithDelivery();
-
-//Task 7: function to read phoneNumber
-
-async function restaurantWithPhoneNumber(phoneNum){
-    try{    
-        const restaurantWithPhoneNum = await Restaurant.findOne({phoneNumber:phoneNum});
-        console.log(restaurantWithPhoneNum);
-    }catch(error){
-        throw error;
-    }
-}
-
-//restaurantWithPhoneNumber("+1288997392");
-
-//Task 8: Read all restaurants by uisine ("Italian").
-
-async function restaurantsWithCuisine(cuisineName){
-    try{
-        const restaurants = await Restaurant.find({cuisine:cuisineName})
-        console.log(restaurants);
-    }catch(error){
-        throw error;
-    }
-}
-
-restaurantsWithCuisine("Italian");
+updatePhoneNumber('+1288997392',{ isDeliveryAvailable: true});
