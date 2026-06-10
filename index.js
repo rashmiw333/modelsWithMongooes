@@ -60,7 +60,7 @@ async function updateHotelByName(hotelName,dataToUpdate){
     }
 }
 
-updateHotelByName("Sunset Resort",{rating: 4.2});
+//updateHotelByName("Sunset Resort",{rating: 4.2});
 
 //Task3:  Take the hotel with phone number "+1299655890" update it to "+1997687392".
 
