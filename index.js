@@ -3,7 +3,6 @@ const Hotel = require("./models/hotel.models");
 
 initializeDatabase();
 
-//Task 1 & Task 2 : add data into database.
 const newHotel = {
         name: "Sunset Resort",
         category: "Resort",
@@ -37,106 +36,42 @@ async function createHotel(newHotel){
 
 //createHotel(newHotel);
 
-//Task3:  read all hotels from the database
+//Task1: hotel: Lake View and update its checkOutTime to 11 AM.
 
-async function readAllHotels(){
+async function updateHotelById(hotelId,dataToUpdate){
     try{
-    const hotels = await Hotel.find();
-      console.log(hotels);
+    const hotel = await Hotel.findByIdAndUpdate(hotelId,dataToUpdate,{new:true});
+      console.log(hotel);
     }catch(error){
-        throw error;
+        console.log("Error occurred while updating data",error);
     }
 }
 
-//readAllHotels();
+//updateHotelById('6a27e3a4b6bf41af0d30df99',{checkOutTime:"11:00 AM"})
 
-//Task4 : read a hotel by its name ("Lake View")
+//Task2 :  "Sunset Resort" update its rating to 4.2.
 
-async function readHotelByName(hotelName){
+async function updateHotelByName(hotelName,dataToUpdate){
     try{
-        const hotels = await Hotel.findOne({name:hotelName});
-        console.log(hotels);
+        const hotel = await Hotel.findOneAndUpdate({name:hotelName},dataToUpdate,{new:true});
+        console.log(hotel);
     }catch(error){
-        throw error;
+        console.log("Error while changing data",error);
     }
 }
 
-//readHotelByName("Lake View");
+updateHotelByName("Sunset Resort",{rating: 4.2});
 
-//Task5: read all hotels which offers parking space
+//Task3:  Take the hotel with phone number "+1299655890" update it to "+1997687392".
 
-async function hotelsWithParkingSpace(){
+async function updateHotelWithPhoneNumber(phoneNumber,dataToUpdate){
     try{
-        const hotels = await Hotel.find({isParkingAvailable: true});
-        console.log(hotels);
+        const hotel = await Hotel.findOneAndUpdate({phoneNumber},dataToUpdate,{new:true});
+        console.log(hotel);
     }catch(error){
-            throw error;
+           console.log("error found while updating",error);
     }
 }
 
-//hotelsWithParkingSpace();
+updateHotelWithPhoneNumber("+1299655890",{phoneNumber:'+1997687392'});
 
-//Task6: to read all hotels which has restaurant available
-
-async function hotelsWithRestaurants(){
-    try{
-        const hotels = await Hotel.find({isRestaurantAvailable: true}); 
-        console.log(hotels);
-    }catch(error){
-        throw error;
-    }
-}
-
-//hotelsWithRestaurants();
-
-//Task7: to read all hotels by category ("Mid-Range")
-
-async function hotelsByCategory(category){
-        try{
-            const hotelsByCategory = await Hotel.find({category:category});
-            console.log(hotelsByCategory);
-        }catch(error){
-            throw error;
-        }
-}
-
-//hotelsByCategory("Mid-Range");
-
-//Task8: to read all hotels by price range ("$$$$ (61+)")
-
-async function hotelsByPrice(range){
-        try{
-            const hotels = await Hotel.find({priceRange:range});
-            console.log(hotels);
-        }catch(error){
-            throw error;
-        }
-}
-
-//hotelsByPrice("$$$$ (61+)");
-
-//Task 9: to read all hotels with 4.0 rating
-
-async function hotelsByRating(rating){
-    try{
-        const hotels = await Hotel.find({rating});
-        console.log(hotels);
-    }catch(error){
-        throw error;
-    }
-}
-
-//hotelsByRating(4.0);
-
-//Task 10 :to read a hotel by phone number ("+1299655890")
-
-async function hotelsByPhone(phoneNumber){
-    try{
-        const hotels = await Hotel.findOne({phoneNumber});
-        console.log(hotels);
-    }catch(error){
-        throw error;
-    }
-}
-
-hotelsByPhone("+1299655890");
