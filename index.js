@@ -3,7 +3,6 @@ const {initializeDatabase} = require("./db/db.connect");
 
 initializeDatabase();
 
-//Task 1 and Task2 to add data in db 
         const newRestaurant = {
             name: "Yo China",
             cuisine: ["Chinese", "Italian"],
