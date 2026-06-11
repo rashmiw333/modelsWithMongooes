@@ -36,42 +36,30 @@ async function createHotel(newHotel){
 
 //createHotel(newHotel);
 
-//Task1: hotel: Lake View and update its checkOutTime to 11 AM.
+//Task1:Create a function deleteHotelById that accepts a hotel ID 
+// and deletes the hotel data from the db. 
+// Take any hotel id from your database and delete the records of that hotel.
 
-async function updateHotelById(hotelId,dataToUpdate){
+async function deleteHotelById(hotelId){
     try{
-    const hotel = await Hotel.findByIdAndUpdate(hotelId,dataToUpdate,{new:true});
-      console.log(hotel);
+        const deletedHotel = await Hotel.findByIdAndDelete(hotelId);
+            console.log(deletedHotel);
     }catch(error){
-        console.log("Error occurred while updating data",error);
+        console.log("Error while fetching Data",error);
     }
 }
 
-//updateHotelById('6a27e3a4b6bf41af0d30df99',{checkOutTime:"11:00 AM"})
+//deleteHotelById('6a26891c4afce9eb638b1470');
 
-//Task2 :  "Sunset Resort" update its rating to 4.2.
+//Task 2: Take hotel phone number and delete the records of that hotel.
 
-async function updateHotelByName(hotelName,dataToUpdate){
+async function deleteHotelByPhoneNumber(phoneNumber){
     try{
-        const hotel = await Hotel.findOneAndUpdate({name:hotelName},dataToUpdate,{new:true});
-        console.log(hotel);
+        const deletedHotel = await Hotel.findOneAndDelete({phoneNumber});
+        console.log(deletedHotel);
     }catch(error){
-        console.log("Error while changing data",error);
+        console.log("Error while data loading",error);
     }
 }
 
-//updateHotelByName("Sunset Resort",{rating: 4.2});
-
-//Task3:  Take the hotel with phone number "+1299655890" update it to "+1997687392".
-
-async function updateHotelWithPhoneNumber(phoneNumber,dataToUpdate){
-    try{
-        const hotel = await Hotel.findOneAndUpdate({phoneNumber},dataToUpdate,{new:true});
-        console.log(hotel);
-    }catch(error){
-           console.log("error found while updating",error);
-    }
-}
-
-updateHotelWithPhoneNumber("+1299655890",{phoneNumber:'+1997687392'});
-
+deleteHotelByPhoneNumber("+1234555890");
