@@ -31,28 +31,28 @@ initializeDatabase();
            
 // createMovie(newMovie);
 
-//find movie by id and update its rating
+//find movie by id and delete it from database
 
-async function movieUpdate(movieId,dataToUpdate){
+async function deleteMovieById(movieId){
     try{
-        const updateMovie = await Movie.findByIdAndUpdate(movieId,dataToUpdate,{new:true});
-        console.log(updateMovie);
+        const deletedMovie = await Movie.findByIdAndDelete(movieId);
+        console.log(deletedMovie); 
     }catch(error){
-        console.log("Error in updating movie data",error);
+        console.log("Error occured while fetchinf data",error);
     }
 }
 
-//movieUpdate('6a22917a21a8df4483b4ca5f',{releaseYear: 2005})
+//deleteMovieById('6a26705d6c24c25e3ecf540f');
 
-//find one data and update its value
+//find movie by title and delete it
 
-async function updateMovieDetail(movieTitle,dataToUpdate){
+async function deleteMovieFromDb(movieTitle){
     try{
-        const updatedMovie = await Movie.findOneAndUpdate({title:movieTitle},dataToUpdate,{new:true});
-        console.log(updatedMovie);
+        const movie = await Movie.findOneAndDelete({title:movieTitle});
+        console.log(movie);
     }catch(error){
-        console.log("Error in chnaging data",error);
+        console.log("Error while getting details",error);
     }
 }
 
-updateMovieDetail("Lagaan",{releaseYear: 2001});
+deleteMovieFromDb("PK");
