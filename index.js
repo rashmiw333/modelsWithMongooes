@@ -36,9 +36,7 @@ async function createHotel(newHotel){
 
 //createHotel(newHotel);
 
-//Task1:Create a function deleteHotelById that accepts a hotel ID 
-// and deletes the hotel data from the db. 
-// Take any hotel id from your database and delete the records of that hotel.
+//Task1: Take hotel id and delete the records of that hotel.
 
 async function deleteHotelById(hotelId){
     try{
