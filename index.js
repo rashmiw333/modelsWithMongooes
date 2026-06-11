@@ -34,7 +34,7 @@ async function createCar(newCarData){
 
 }
 
-//createCar(newCarData);
+// createCar(newCarData);
 
 //Task3 : function to read all cars
 
@@ -74,9 +74,9 @@ async function readCarsByColor(color){
     }
 }
 
-//readCarsByColor("Black");
+readCarsByColor("Black");
 
-//Task 6: 6. ar with model "Corolla".Update the price to 2300000. 
+//Task 6: 6. car with model "Corolla".Update the price to 2300000. 
 
 async function updatecarPrice(model,dataToUpdate){
     try{
@@ -114,7 +114,7 @@ async function deletecarById(carId){
 
 //deletecarById('6a25ba4b7dc38b5c9b7e48e5');
 
-//Task9: Delete the car data with body style "Coupe" from the database 
+//Task9: Delete the car data with body style "Sedan" from the database 
 
 async function deleteCarByBodyStyle(bodyStyle){
     try{
@@ -125,4 +125,4 @@ async function deleteCarByBodyStyle(bodyStyle){
     }
 }
 
-deleteCarByBodyStyle({bodyStyle: 'Sedan',});
+//deleteCarByBodyStyle({bodyStyle: 'Sedan',});
