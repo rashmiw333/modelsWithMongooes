@@ -31,41 +31,28 @@ initializeDatabase();
            
 //  createRestaurant(newRestaurant);
 
-//  Task1: with restaurant ID and an object with updated data of rating from 3.9 to 4.1.
+//Task1:  Take restaurant id and delete the records of that restaurant.
 
-async function restaurantUpdate(restaurantId,dataToUpdate){
+async function deleteRestaurantById(restaurantId){
     try{
-        const updatedData = await Restaurant.findByIdAndUpdate(restaurantId,dataToUpdate,{new:true});
-        console.log(updatedData);
+        const deletedRestaurant = await Restaurant.findByIdAndDelete(restaurantId);
+        console.log(deletedRestaurant)
     }catch(error){
-        console.log("Error while updating data",error);
+        console.log("Error occurred while fetching Data",error);
     }
 }
 
-//restaurantUpdate('6a27c77e767452474a7bd63d',{rating:4.1})
+//deleteRestaurantById('6a267eb053ab8c1fb77992b3');
 
-//Task2:  update  name from "Somi" to "Som Sarovar".
+//Task2: Take restaurant name  and delete the records of that restaurant.
 
-async function updateRestaurantDetails(restaurantname,dataToupdate){
+async function deleteRestaurantFromDB(restaurantName){
     try{
-        const updatedRestaurant = await Restaurant.findOneAndUpdate({name:restaurantname},dataToupdate,{new:true});
-        console.log(updatedRestaurant);
+        const deletedRestaurant = await Restaurant.findOneAndDelete({name:restaurantName});
+        console.log(deletedRestaurant);
     }catch(error){
-        console.log("Error occurred while chnaging data",error);
+        console.log("error occurred while deleting Data",error);
     }
 }
 
-//updateRestaurantDetails('Somi',{name: 'Som Sarovar'});
-
-//Task 3: restaurant with phone number "+1288997392",update isDeliveryAvailable option to true.
-
-async function updatePhoneNumber(phoneNumber,dataToUpdate){
-    try{
-        const updatedRestaurant = await Restaurant.findOneAndUpdate({phoneNumber},dataToUpdate,{new:true});
-        console.log(updatedRestaurant);
-    }catch(error){
-        console.log("Error while changing the data",error);
-    }
-}
-
-updatePhoneNumber('+1288997392',{ isDeliveryAvailable: true});
+deleteRestaurantFromDB("Cha Cha");
