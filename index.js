@@ -118,7 +118,7 @@ async function deletecarById(carId){
 
 async function deleteCarByBodyStyle(bodyStyle){
     try{
-        const deletedCar = await Car.findOneAndDelete(bodyStyle);
+        const deletedCar = await Car.findOneAndDelete({bodyStyle});
         console.log(deletedCar);
     }catch(error){
         console.log("Error found while fectching data",error);
