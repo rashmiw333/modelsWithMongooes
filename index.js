@@ -1,58 +1,164 @@
+const express = require("express")
+const app = express();
+
 const {initializeDatabase} = require("./db/db.connect");
- const Movie = require("./models/movie.models");
+ const Restaurant = require("./models/restaurant.models");
+
+ app.use(express.json());
 
 initializeDatabase();
 
-        const newMovie = {
-                title: "New Movie",
-                releaseYear: 2023,
-                genre: ["Drama"],
-                director: "Aditya Roy Chopra",
-                actors: ["Actor1","Actor2"],
-                language: "Hindi",
-                country: "India",
-                rating: 6.1,
-                plot: "A young Man and Young Woman fall in love on a trip",
-                awards: "IFA Filmfare Awards",
-                posterUrl: "https://example.com/new-poster1.jpg",
-                trailerUrl: "https://example.com/new-trailer1.mp4",
+//Task 1 and Task2 to add data in db 
+        const newRestaurant = {
+            name: "Yo China",
+            cuisine: ["Chinese", "Italian"],
+            location: "MG Road, Bangalore",
+            rating: 3.9,
+            reviews: [],
+            website: "https://yo-example.com",
+            phoneNumber: "+1288997392",
+            openHours: "Tue-Sun: 10:00 AM - 11:00 PM",
+            priceRange: "$$$ (31-60)",
+            reservationsNeeded: true,
+            isDeliveryAvailable: false,
+            menuUrl: "https://yo-example.com/menu",
+            photos: ["https://example.com/yo-photo1.jpg", "https://example.com/yo-photo2.jpg", "https://example.com/yo-photo3.jpg"]
+};
 
-        };
-
-        async function createMovie(newMovie){
+        async function createRestaurant(newRestaurant){
             try{
-                const movie = new Movie(newMovie);
-                const saveMovie = await movie.save();
-                console.log(saveMovie,"movie Data")
+                const restaurant = new Restaurant(newRestaurant);
+                const saveRestaurant= await restaurant.save();
+                console.log(saveRestaurant,"restaurant Data")
             }catch(error){
                 throw error;
             }
         }
            
-// createMovie(newMovie);
+//  createRestaurant(newRestaurant);
 
-//find movie by id and update its rating
 
-async function movieUpdate(movieId,dataToUpdate){
+async function readAllRestaturantsData(){
     try{
-        const updateMovie = await Movie.findByIdAndUpdate(movieId,dataToUpdate,{new:true});
-        console.log(updateMovie);
+        const allRestaurants = await Restaurant.find();
+        return allRestaurants;
     }catch(error){
-        console.log("Error in updating movie data",error);
+        throw error;
+    }
+}
+//Task1
+app.get("/restuarants", async(req,res)=>{
+    try{
+        const restauarants = await readAllRestaturantsData()
+        if(restauarants.length !=0){
+            res.json(restauarants)
+        }else{
+            res.status(404).json({error:" Restaurant Not Found."})
+        }
+    }catch(error){
+        res.status(500).json({error:"Failed to fetch Restaurants."})
+    }
+})
+
+
+//Task 2
+async function readRestaurantsByname(restaurantName){
+    try{
+        const restaurantByName = await Restaurant.find({name:restaurantName});
+        return restaurantByName;
+    }catch(error){
+        throw error;
     }
 }
 
-//movieUpdate('6a22917a21a8df4483b4ca5f',{releaseYear: 2005})
-
-//find one data and update its value
-
-async function updateMovieDetail(movieTitle,dataToUpdate){
+app.get("/restaurants/:restaurantName",async(req,res)=>{
     try{
-        const updatedMovie = await Movie.findOneAndUpdate({title:movieTitle},dataToUpdate,{new:true});
-        console.log(updatedMovie);
+        const restaurant = await readRestaurantsByname(req.params.restaurantName);
+        if(restaurant){
+            res.json(restaurant);
+        }else{
+            res.status(404).json({error:"Restaurant Not Found"});
+        }
     }catch(error){
-        console.log("Error in chnaging data",error);
+        res.status(500).json({error:"Failed to fetch restaurants"})
+    }
+})
+
+//Task 3: function to read phoneNumber
+
+async function restaurantWithPhoneNumber(phoneNum){
+    try{    
+        const restaurantWithPhoneNum = await Restaurant.findOne({phoneNumber:phoneNum});
+        return restaurantWithPhoneNum;
+    }catch(error){
+        throw error;
     }
 }
 
-updateMovieDetail("Lagaan",{releaseYear: 2001});
+app.get("/restaurants/directory/:phoneNumber",async(req,res)=>{
+    try{
+        const restaurant = await restaurantWithPhoneNumber(req.params.phoneNumber);
+        if(restaurant.length !=0){
+            res.json(restaurant)
+        }else{
+            res.status(404).json({error:" Restaurant not Found"});
+        }
+
+    }catch(error){
+        res.status(500).json({error:"Error caused while fetching error"})
+    }
+})
+
+//Task 4: Read all restaurants by uisine ("Italian").
+
+async function restaurantsWithCuisine(cuisineName){
+    try{
+        const restaurants = await Restaurant.find({cuisine:cuisineName})
+        return restaurants;
+    }catch(error){
+        throw error;
+    }
+}
+
+app.get("/restaurants/cuisine/:cuisineName",async(req,res)=>{
+        try{
+    const restaurants = await restaurantsWithCuisine(req.params.cuisineName);
+    if(restaurants.length !=0){
+        res.json(restaurants)
+    }else{
+        res.status(404).json({error:"Restaurant Not Found."})
+    }
+   }catch(error){
+        res.status(500).json({error:"Error Occured while Fetching Data"});
+   }
+})
+
+//Task5
+async function readRestaurantsWithLocation(restaurantLocation){
+    try{
+    const restaurants = await Restaurant.find({location:restaurantLocation});
+     return restaurants;
+    }catch(error){
+        throw error;
+    }
+}
+
+app.get("/restaurants/location/:restaurantLocation", async(req,res)=>{
+    try{
+        const restaurant = await readRestaurantsWithLocation(req.params.restaurantLocation)
+        if(restaurant.length !=0){
+            res.json(restaurant);
+        }else{
+            res.status(404).json({error:"Restaurant Not Found."});
+        }
+    }catch(error){
+        res.status(500).json({error:"Error Occurred while fetching Data"});
+    }
+})
+
+
+
+const PORT = 3000
+app.listen(PORT,()=>{
+    console.log(`Server running on ${PORT}`);
+})
