@@ -74,7 +74,7 @@ async function readRestaurantsByname(restaurantName){
 app.get("/restaurants/:restaurantName",async(req,res)=>{
     try{
         const restaurant = await readRestaurantsByname(req.params.restaurantName);
-        if(restaurant){
+        if(restaurant.length !=0){
             res.json(restaurant);
         }else{
             res.status(404).json({error:"Restaurant Not Found"});
@@ -98,7 +98,7 @@ async function restaurantWithPhoneNumber(phoneNum){
 app.get("/restaurants/directory/:phoneNumber",async(req,res)=>{
     try{
         const restaurant = await restaurantWithPhoneNumber(req.params.phoneNumber);
-        if(restaurant.length !=0){
+        if(restaurant){
             res.json(restaurant)
         }else{
             res.status(404).json({error:" Restaurant not Found"});
